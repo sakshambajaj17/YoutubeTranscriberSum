@@ -1,6 +1,5 @@
 import streamlit as st
 from dotenv import load_dotenv
-
 load_dotenv() ##load all the nevironment variables
 import os
 import google.generativeai as genai
@@ -41,9 +40,13 @@ st.title("YouTube Transcript to Detailed Notes Converter")
 youtube_link = st.text_input("Enter YouTube Video Link:")
 
 if youtube_link:
-    video_id = youtube_link.split("=")[1]
+    video_id = youtube_link.split("=")[1]  # Extract the last element after splitting by "="
+    
     print(video_id)
-    st.image(f"http://img.youtube.com/vi/{video_id}/0.jpg", use_column_width=True)
+    
+    youtube_url = f"https://www.youtube.com/watch?v={video_id}"
+    # Display the YouTube video
+    st.video(youtube_url)
 
 if st.button("Get Detailed Notes"):
     transcript_text=extract_transcript_details(youtube_link)
